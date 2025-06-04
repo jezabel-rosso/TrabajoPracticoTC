@@ -1,12 +1,15 @@
 import java.util.HashMap;
 import java.util.Map;
-import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.tree.*;
 
 public class SemanticAnalyzer extends CPPSubsetParserBaseListener {
 
-    private Map<String, String> symbolTable = new HashMap<>();
+    private final Map<String, String> symbolTable = new HashMap<>();
     private boolean hasSemanticErrors = false;
+
+    @Override
+    public void enterProgram(CPPSubsetParser.ProgramContext ctx) {
+        System.out.println("Comenzando análisis semántico...");
+    }
 
     @Override
     public void enterVariableDecl(CPPSubsetParser.VariableDeclContext ctx) {
@@ -18,6 +21,7 @@ public class SemanticAnalyzer extends CPPSubsetParserBaseListener {
             hasSemanticErrors = true;
         } else {
             symbolTable.put(varName, varType);
+            System.out.println("Variable declarada: " + varName + " de tipo " + varType);
         }
     }
 
@@ -28,6 +32,8 @@ public class SemanticAnalyzer extends CPPSubsetParserBaseListener {
         if (!symbolTable.containsKey(varName)) {
             System.err.println("Error semántico: variable '" + varName + "' no declarada.");
             hasSemanticErrors = true;
+        } else {
+            System.out.println("Asignación válida a la variable: " + varName);
         }
     }
 
