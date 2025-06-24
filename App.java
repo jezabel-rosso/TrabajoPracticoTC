@@ -1,8 +1,8 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class ParserTest {
-
+public class App {
+    
     public static void main(String[] args) throws Exception {
         CharStream input = CharStreams.fromFileName("programaEjemplo.cpp");
 
