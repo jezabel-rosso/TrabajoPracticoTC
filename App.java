@@ -13,6 +13,19 @@ public class App {
         CharStream input = CharStreams.fromFileName("programaEjemplo.cpp");
 
         CPPSubsetLexer lexer = new CPPSubsetLexer(input);
+
+        // Mostrar tabla de análisis léxico
+        System.out.println("Tabla de análisis léxico:");
+        lexer.reset();
+        Token token;
+        while ((token = lexer.nextToken()).getType() != Token.EOF) {
+            String tipo = CPPSubsetLexer.VOCABULARY.getSymbolicName(token.getType());
+            System.out.printf("Línea %d\tToken: %-15s\tLexema: '%s'%n", token.getLine(), tipo, token.getText());
+        }
+        System.out.println();
+
+        // Volver a crear el lexer para el parser
+        lexer.reset();
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CPPSubsetParser parser = new CPPSubsetParser(tokens);
 
