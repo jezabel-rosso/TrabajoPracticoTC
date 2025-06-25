@@ -5,6 +5,9 @@ import org.antlr.v4.runtime.tree.Trees;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class App {
@@ -49,6 +52,19 @@ public class App {
 
         if (!semanticAnalyzer.hasErrors()) {
             System.out.println("Análisis semántico exitoso.");
+
+            // Generación de código intermedio (fase 4)
+            IntermediateCodeGenerator generator = new IntermediateCodeGenerator();
+            generator.visit(tree);
+            List<String> code = generator.getCode();
+
+            System.out.println("\nCódigo intermedio:");
+            for (String line : code) {
+                System.out.println(line);
+            }
+
+            Files.write(Paths.get("codigoIntermedio.txt"), code);
+            System.out.println("\nArchivo 'codigoIntermedio.txt' generado.");
         }
     }
 
