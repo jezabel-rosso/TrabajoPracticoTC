@@ -65,6 +65,18 @@ public class App {
 
             Files.write(Paths.get("codigoIntermedio.txt"), code);
             System.out.println("\nArchivo 'codigoIntermedio.txt' generado.");
+
+            // Fase 5: Optimización de código intermedio
+            CodeOptimizer optimizer = new CodeOptimizer(code);
+            List<String> optimizedCode = optimizer.optimize();
+
+            System.out.println("\nCódigo intermedio optimizado:");
+            for (String line : optimizedCode) {
+                System.out.println(line);
+            }
+
+            Files.write(Paths.get("codigoIntermedioOptimizado.txt"), optimizedCode);
+            System.out.println("\nArchivo 'codigoIntermedioOptimizado.txt' generado.");
         }
     }
 
