@@ -40,16 +40,15 @@ whileLoop      : WHILE LPAREN expr RPAREN block;
 returnStatement: RETURN expr? SEMI;
 
 expr
-    : expr op=('*'|'/') expr
-    | expr op=('+'|'-') expr
-    | expr op=('<' | '<=' | '>' | '>=' | '==' | '!=') expr
-    | expr op='&&' expr
-    | expr op='||' expr
+    : left=expr op=('*'|'/') right=expr
+    | left=expr op=('+'|'-') right=expr
+    | left=expr op=('<' | '<=' | '>' | '>=' | '==' | '!=') right=expr
+    | left=expr op='&&' right=expr
+    | left=expr op='||' right=expr
     | LPAREN expr RPAREN
     | ID
     | INTLIT
     | DOUBLELIT
     | CHARLIT
     ;
-
 

@@ -1,4 +1,4 @@
-// Generated from c:/Users/Pc/Desktop/Quinto año de la universidad/Tecnicas de compilacion/Trabajo/CPPSubsetParser.g4 by ANTLR 4.13.1
+// Generated from c:/Users/Pc/Desktop/Quinto año de la universidad/Tecnicas de compilacion/TP Final/TrabajoPracticoTC/CPPSubsetParser.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -877,7 +877,9 @@ public class CPPSubsetParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExprContext extends ParserRuleContext {
+		public ExprContext left;
 		public Token op;
+		public ExprContext right;
 		public TerminalNode LPAREN() { return getToken(CPPSubsetParser.LPAREN, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
@@ -979,6 +981,7 @@ public class CPPSubsetParser extends Parser {
 					case 1:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(136);
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
@@ -994,12 +997,13 @@ public class CPPSubsetParser extends Parser {
 							consume();
 						}
 						setState(138);
-						expr(11);
+						((ExprContext)_localctx).right = expr(11);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(139);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
@@ -1015,12 +1019,13 @@ public class CPPSubsetParser extends Parser {
 							consume();
 						}
 						setState(141);
-						expr(10);
+						((ExprContext)_localctx).right = expr(10);
 						}
 						break;
 					case 3:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(142);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
@@ -1036,31 +1041,33 @@ public class CPPSubsetParser extends Parser {
 							consume();
 						}
 						setState(144);
-						expr(9);
+						((ExprContext)_localctx).right = expr(9);
 						}
 						break;
 					case 4:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(145);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(146);
 						((ExprContext)_localctx).op = match(AND);
 						setState(147);
-						expr(8);
+						((ExprContext)_localctx).right = expr(8);
 						}
 						break;
 					case 5:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
+						_localctx.left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(148);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(149);
 						((ExprContext)_localctx).op = match(OR);
 						setState(150);
-						expr(7);
+						((ExprContext)_localctx).right = expr(7);
 						}
 						break;
 					}

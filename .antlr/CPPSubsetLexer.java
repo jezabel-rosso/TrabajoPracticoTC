@@ -1,4 +1,4 @@
-// Generated from c:/Users/Pc/Desktop/Quinto año de la universidad/Tecnicas de compilacion/Trabajo/CPPSubsetLexer.g4 by ANTLR 4.13.1
+// Generated from c:/Users/Pc/Desktop/Quinto año de la universidad/Tecnicas de compilacion/TP Final/TrabajoPracticoTC/CPPSubsetLexer.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

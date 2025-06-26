@@ -17,17 +17,14 @@ public class App {
 
         CPPSubsetLexer lexer = new CPPSubsetLexer(input);
 
-        // Mostrar tabla de análisis léxico
-        System.out.println("Tabla de análisis léxico:");
+        Logger.log("Tabla de análisis léxico:");
         lexer.reset();
         Token token;
         while ((token = lexer.nextToken()).getType() != Token.EOF) {
             String tipo = CPPSubsetLexer.VOCABULARY.getSymbolicName(token.getType());
-            System.out.printf("Línea %d\tToken: %-15s\tLexema: '%s'%n", token.getLine(), tipo, token.getText());
+            Logger.log(String.format("Línea %d\tToken: %-15s\tLexema: '%s'%n", token.getLine(), tipo, token.getText()));
         }
-        System.out.println();
 
-        // Volver a crear el lexer para el parser
         lexer.reset();
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CPPSubsetParser parser = new CPPSubsetParser(tokens);
@@ -35,48 +32,44 @@ public class App {
         parser.removeErrorListeners();
         parser.addErrorListener(new DiagnosticErrorListener());
 
-        // Generar árbol sintáctico desde la regla inicial 'program'
         ParseTree tree = parser.program();
 
-        System.out.println("Arbol sintáctico:");
-        System.out.println(tree.toStringTree(parser));
+        Logger.log("Arbol sintáctico:");
+        Logger.log(tree.toStringTree(parser));
 
-        // Exportar a archivo DOT
         exportParseTreeToDot(tree, parser, "arbol.dot");
-        System.out.println("Archivo DOT generado como arbol.dot");
+        Logger.log("Archivo DOT generado como arbol.dot");
 
-        // Análisis semántico
         ParseTreeWalker walker = new ParseTreeWalker();
         SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer();
+        Logger.log("Comenzando análisis semántico...");
         walker.walk(semanticAnalyzer, tree);
 
         if (!semanticAnalyzer.hasErrors()) {
-            System.out.println("Análisis semántico exitoso.");
+            Logger.log("Análisis semántico exitoso.");
 
-            // Generación de código intermedio (fase 4)
             IntermediateCodeGenerator generator = new IntermediateCodeGenerator();
             generator.visit(tree);
             List<String> code = generator.getCode();
 
-            System.out.println("\nCódigo intermedio:");
+            Logger.log("\nCódigo intermedio:");
             for (String line : code) {
-                System.out.println(line);
+                Logger.log(line);
             }
 
             Files.write(Paths.get("codigoIntermedio.txt"), code);
-            System.out.println("\nArchivo 'codigoIntermedio.txt' generado.");
+            Logger.log("\nArchivo 'codigoIntermedio.txt' generado.");
 
-            // Fase 5: Optimización de código intermedio
             CodeOptimizer optimizer = new CodeOptimizer(code);
             List<String> optimizedCode = optimizer.optimize();
 
-            System.out.println("\nCódigo intermedio optimizado:");
+            Logger.log("\nCódigo intermedio optimizado:");
             for (String line : optimizedCode) {
-                System.out.println(line);
+                Logger.log(line);
             }
 
             Files.write(Paths.get("codigoIntermedioOptimizado.txt"), optimizedCode);
-            System.out.println("\nArchivo 'codigoIntermedioOptimizado.txt' generado.");
+            Logger.log("\nArchivo 'codigoIntermedioOptimizado.txt' generado.");
         }
     }
 
