@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    // carpetas de compilación y generación
+    "**/target": true,
+    "**/generated-sources": true,
+
+    // artefactos de ANTLR
+    "**/.antlr": true,
+    "**/*.interp": true,
+    "**/*.tokens": true,
+
+    // clases compiladas
+    "**/*.class": true
+  }
+}
