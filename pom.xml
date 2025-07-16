@@ -1,0 +1,107 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ar.edu.ubp</groupId>
+  <artifactId>TrabajoPracticoTC</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr4-runtime</artifactId>
+      <version>4.13.2</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- Recursos: filtramos para no copiar .interp/.tokens -->
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.build.directory}/generated-sources/antlr4</directory>
+        <includes>
+          <include>**/*.g4</include>
+        </includes>
+        <excludes>
+          <exclude>**/*.interp</exclude>
+          <exclude>**/*.tokens</exclude>
+        </excludes>
+        <filtering>false</filtering>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- 1) Generación ANTLR -->
+      <plugin>
+        <groupId>org.antlr</groupId>
+        <artifactId>antlr4-maven-plugin</artifactId>
+        <version>4.13.2</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>antlr4</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <arguments>
+            <argument>-visitor</argument>
+            <argument>-package</argument>
+            <argument>ar.edu.ubp.compilador</argument>
+          </arguments>
+          <outputDirectory>${project.build.directory}/generated-sources/antlr4/ar/edu/ubp/compilador</outputDirectory>
+        </configuration>
+      </plugin>
+
+      <!-- 2) Compilador Java -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <generatedSourcesDirectory>${project.build.directory}/generated-sources/antlr4</generatedSourcesDirectory>
+        </configuration>
+      </plugin>
+
+      <!-- 3) Empaquetado: excluimos clases ANTLR y archivos auxiliares -->
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <excludes>
+            <!-- Clases generadas por ANTLR -->
+            <exclude>**/CPPSubsetParser*.class</exclude>
+            <exclude>**/CPPSubsetLexer*.class</exclude>
+            <!-- Archivos auxiliares de ANTLR -->
+            <exclude>**/*.interp</exclude>
+            <exclude>**/*.tokens</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+
+      <!-- 4) Ejecución -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <mainClass>ar.edu.ubp.compilador.App</mainClass>
+          <classpathScope>compile</classpathScope>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
