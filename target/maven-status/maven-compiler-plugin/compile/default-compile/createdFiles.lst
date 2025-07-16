@@ -14,6 +14,7 @@ ar\edu\ubp\compilador\CPPSubsetParser$IfStatementContext.class
 ar\edu\ubp\compilador\CPPSubsetParser$ReturnStatementContext.class
 ar\edu\ubp\compilador\CPPSubsetParserListener.class
 ar\edu\ubp\compilador\ar\edu\ubp\compilador\CPPSubsetParser$FunctionCallExprContext.class
+ar\edu\ubp\compilador\CPPSubsetParser.tokens
 ar\edu\ubp\compilador\ar\edu\ubp\compilador\CPPSubsetParser$CharLiteralExprContext.class
 ar\edu\ubp\compilador\ast\CompoundNode.class
 ar\edu\ubp\compilador\ar\edu\ubp\compilador\CPPSubsetParser$ProgramContext.class
@@ -26,6 +27,7 @@ ar\edu\ubp\compilador\ar\edu\ubp\compilador\CPPSubsetParser$AddSubExprContext.cl
 ar\edu\ubp\compilador\CPPSubsetParserBaseVisitor.class
 ar\edu\ubp\compilador\ast\ReturnNode.class
 ar\edu\ubp\compilador\CPPSubsetParser$ParamContext.class
+ar\edu\ubp\compilador\ar\edu\ubp\compilador\CPPSubsetLexer.interp
 ar\edu\ubp\compilador\ast\AssignmentNode.class
 ar\edu\ubp\compilador\CPPSubsetParser$AddSubExprContext.class
 ar\edu\ubp\compilador\CPPSubsetParser$ParamListContext.class
@@ -79,5 +81,6 @@ ar\edu\ubp\compilador\CPPSubsetParser$TypeContext.class
 ar\edu\ubp\compilador\ar\edu\ubp\compilador\CPPSubsetParser$ReturnStatementContext.class
 ar\edu\ubp\compilador\ar\edu\ubp\compilador\CPPSubsetParser$BlockContext.class
 ar\edu\ubp\compilador\CPPSubsetParser$IntLiteralExprContext.class
+ar\edu\ubp\compilador\CPPSubsetLexer.tokens
 ar\edu\ubp\compilador\ast\LiteralNode.class
 ar\edu\ubp\compilador\CPPSubsetParser$ForLoopContext.class
